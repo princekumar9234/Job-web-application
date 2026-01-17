@@ -1,0 +1,10 @@
+node_modules/
+.env
+*.log
+log.txt
+error.txt
+error_2.txt
+startup_error.txt
+debug_store.txt
+debug_store_detailed.txt
+uploads/

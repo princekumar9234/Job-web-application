@@ -1,0 +1,14 @@
+job portal web application
+ admin
+email:- admin@jobhub.com
+password:-adminpassword123
+
+employer
+email:-pk@gmail.com
+password:-pk12345
+
+student
+email:-udit@gmail.com
+password:-udit123
+
+start:- npm run dev
