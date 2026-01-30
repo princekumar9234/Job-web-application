@@ -1,5 +1,6 @@
 job portal web application
- admin
+
+admin
 email:- admin@jobhub.com
 password:-adminpassword123
 

@@ -19,6 +19,12 @@ const jobSchema = new mongoose.Schema({
         required: [true, 'Please add job type'],
         enum: ['Full-time', 'Part-time', 'Contract', 'Freelance', 'Internship']
     },
+    workMode: {
+        type: String,
+        enum: ['Remote', 'On-site', 'Hybrid'],
+        default: 'On-site',
+        required: [true, 'Please select work mode']
+    },
     category: {
         type: String,
         required: [true, 'Please add a category']

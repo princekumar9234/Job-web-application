@@ -101,8 +101,14 @@
                     <tbody>
                         <% applications.forEach(app => { %>
                             <tr>
-                                <td><strong><a href="/jobs/<%= app.job._id %>" style="color: inherit; text-decoration: none;"><%= app.job.title %></a></strong></td>
-                                <td><%= app.job.company %></td>
+                                <td>
+                                    <% if (app.job) { %>
+                                        <strong><a href="/jobs/<%= app.job._id %>" style="color: inherit; text-decoration: none;"><%= app.job.title %></a></strong>
+                                    <% } else { %>
+                                        <strong style="color: var(--text-muted);">Job No Longer Available</strong>
+                                    <% } %>
+                                </td>
+                                <td><%= app.job ? app.job.company : 'Unknown' %></td>
                                 <td><%= app.appliedAt.toDateString() %></td>
                                 <td>
                                     <% 
@@ -111,13 +117,25 @@
                                         if (app.status === 'Rejected') statusClass = 'tag-danger';
                                         if (app.status === 'Reviewed') statusClass = 'tag-info';
                                     %>
-                                    <a href="/jobs/<%= app.job._id %>" style="text-decoration: none;">
+                                    <% if (app.job) { %>
+                                        <a href="/jobs/<%= app.job._id %>" style="text-decoration: none;">
+                                            <span class="tag <%= statusClass %>">
+                                                <%= app.status %>
+                                            </span>
+                                        </a>
+                                    <% } else { %>
                                         <span class="tag <%= statusClass %>">
                                             <%= app.status %>
                                         </span>
-                                    </a>
+                                    <% } %>
                                 </td>
-                                <td><a href="/jobs/<%= app.job._id %>" style="color: var(--primary-color);">View Job</a></td>
+                                <td>
+                                    <% if (app.job) { %>
+                                        <a href="/jobs/<%= app.job._id %>" style="color: var(--primary-color);">View Job</a>
+                                    <% } else { %>
+                                        <span style="color: var(--text-muted);">Unavailable</span>
+                                    <% } %>
+                                </td>
                             </tr>
                         <% }) %>
                     </tbody>

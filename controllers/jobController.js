@@ -89,13 +89,29 @@ exports.updateJob = async (req, res) => {
 exports.deleteJob = async (req, res) => {
     try {
         const job = await Job.findById(req.params.id);
-        if (!job || job.employer.toString() !== req.session.user.id) {
+        
+        // Allow if user is the employer who created it OR if user is an admin
+        if (!job) {
+             return res.status(404).render('error', { message: 'Job not found' });
+        }
+        
+        if (job.employer.toString() !== req.session.user.id && req.session.user.role !== 'admin') {
             return res.status(401).render('error', { message: 'Not authorized' });
         }
 
+        // Delete all applications specifically associated with this job
+        await Application.deleteMany({ job: job._id });
+
         await job.deleteOne();
-        res.redirect('/dashboard');
+        
+        // Redirect based on role
+        if (req.session.user.role === 'admin') {
+            res.redirect('/admin');
+        } else {
+            res.redirect('/dashboard');
+        }
     } catch (err) {
+        console.error(err);
         res.status(500).render('error', { message: 'Failed to delete job' });
     }
 };

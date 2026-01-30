@@ -9,6 +9,7 @@
                 
                 <div class="meta" style="margin-bottom: 2rem;">
                     <span style="margin-right: 1.5rem;"><i class="fas fa-map-marker-alt"></i> <%= job.location %></span>
+                    <span style="margin-right: 1.5rem;"><i class="fas fa-laptop-house"></i> <%= job.workMode || 'On-site' %></span>
                     <span style="margin-right: 1.5rem;"><i class="fas fa-clock"></i> <%= job.type %></span>
                     <span style="margin-right: 1.5rem;"><i class="fas fa-money-bill-wave"></i> <%= job.salary %></span>
                 </div>
@@ -27,7 +28,7 @@
                     </ul>
                 </div>
 
-                <% if (job.location && job.location.toLowerCase() !== 'remote') { %>
+                <% if (job.workMode !== 'Remote') { %>
                     <div style="margin-top: 2rem;">
                         <h3 style="margin-bottom: 1rem;"><i class="fas fa-map-marked-alt"></i> Company Location</h3>
                         <div class="glass" style="height: 300px; width: 100%; overflow: hidden; border-radius: 12px;">
